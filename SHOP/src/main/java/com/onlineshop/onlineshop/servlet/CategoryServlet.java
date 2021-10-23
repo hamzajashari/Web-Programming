@@ -1,5 +1,8 @@
 package com.onlineshop.onlineshop.servlet;
 
+import com.onlineshop.onlineshop.model.Category;
+import com.onlineshop.onlineshop.service.CategoryService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,62 +13,33 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @WebServlet(name = "category-servlet",urlPatterns = "/servlet/category")
 public class CategoryServlet extends HttpServlet {
-    class Category{
 
-        private String name;
-        private String description;
+    private final CategoryService categoryService;
 
-        public String getName() {
-            return name;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Category(String name,String description) {
-            this.name = name;
-            this.description=description;
-        }
-    }
-    //inner memory
-    private List<Category> categoryList = null;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        this.categoryList=new ArrayList<>();
-        this.categoryList.add(new Category("Software","Software is...."));
-        this.categoryList.add(new Category("Books","Books are important.."));
+    public CategoryServlet(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ipAddress=req.getRemoteAddr();
-        String clientAgent=req.getHeader("User-Agent");
-        PrintWriter out=resp.getWriter();
+        String ipAddress = req.getRemoteAddr();
+        String clientAgent = req.getHeader("User-Agent");
+        PrintWriter out = resp.getWriter();
         out.println("<html>");
         out.println("<head>");
         out.println("</head>");
         out.println("<body>");
         out.println("<h2>User Info</h2>");
-        out.format("IP address: %s<br/>",ipAddress);
-        out.format("Client Agent: %s",clientAgent);
+        out.format("IP address: %s<br/>", ipAddress);
+        out.format("Client Agent: %s", clientAgent);
 
         out.println("<h2>Category List</h2>");
         out.println("<ul>");
-        categoryList.forEach(r->
-                out.format("<li>%s - %s</li>",r.getName(),r.getDescription())
+        categoryService.listCategories().forEach(r ->
+                out.format("<li>%s - %s</li>", r.getName(), r.getDescription())
         );
         out.println("</ul>");
 
@@ -89,13 +63,8 @@ public class CategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String categoryName = req.getParameter("name");
         String categoryDesc = req.getParameter("desc");
-        addCategory(categoryName,categoryDesc);
+        categoryService.create(categoryName, categoryDesc);
         resp.sendRedirect("/servlet/category");
-    }
 
-    public void addCategory(String name,String desc){
-        if(name!=null && !name.isEmpty()){
-            this.categoryList.add(new Category(name,desc));
-        }
     }
 }
