@@ -1,4 +1,4 @@
-package com.onlineshop.onlineshop.servlet;
+package com.onlineshop.onlineshop.web.servlet;
 
 import com.onlineshop.onlineshop.exceptions.InvalidUserCredentialIsException;
 import com.onlineshop.onlineshop.model.User;
