@@ -23,8 +23,9 @@ public class LoginFilter implements Filter {
         HttpServletResponse response= (HttpServletResponse) servletResponse;
 
         User user = (User) request.getSession().getAttribute("user");
+
         String path =request.getServletPath();
-        if(!"/login".equals(path) &&user==null){
+        if(!"/login".equals(path) && !"/register".equals(path) &&user==null){
             response.sendRedirect("/login");
         }
         else {

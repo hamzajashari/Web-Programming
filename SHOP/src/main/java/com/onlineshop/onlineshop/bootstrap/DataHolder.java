@@ -17,7 +17,7 @@ public class DataHolder {
     public void init(){
         categoryList.add(new Category("Books","Books category"));
         categoryList.add(new Category("Movies","Movies category"));
-        userList.add(new User("hamza.jashari","wp","Hamza","Jashari"));
+        userList.add(new User("hamza","wp","Hamza","Jashari"));
         userList.add(new User("hamzaj","pw","Hamza","Jashari"));
     }
 
