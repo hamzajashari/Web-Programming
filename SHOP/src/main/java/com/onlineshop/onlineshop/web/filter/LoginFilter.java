@@ -4,7 +4,6 @@ import com.onlineshop.onlineshop.model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class LoginFilter implements Filter {
         User user = (User) request.getSession().getAttribute("user");
 
         String path =request.getServletPath();
-        if(!"/login".equals(path) && !"/register".equals(path) &&user==null){
+        if (!"/login".equals(path) && !"/register".equals(path) && !"/main.css".equals(path) && user==null) {
             response.sendRedirect("/login");
         }
         else {
