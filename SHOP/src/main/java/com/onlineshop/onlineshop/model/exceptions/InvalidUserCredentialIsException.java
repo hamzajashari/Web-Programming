@@ -1,4 +1,4 @@
-package com.onlineshop.onlineshop.exceptions;
+package com.onlineshop.onlineshop.model.exceptions;
 
 public class InvalidUserCredentialIsException extends RuntimeException{
 

@@ -1,7 +1,7 @@
 package com.onlineshop.onlineshop.web.controller;
 
-import com.onlineshop.onlineshop.exceptions.InvalidArgumentsException;
-import com.onlineshop.onlineshop.exceptions.PasswordDoesntMatchException;
+import com.onlineshop.onlineshop.model.exceptions.InvalidArgumentsException;
+import com.onlineshop.onlineshop.model.exceptions.PasswordDoesntMatchException;
 import com.onlineshop.onlineshop.service.AuthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.annotation.PostConstruct;
 
 @Controller
 @RequestMapping("register")

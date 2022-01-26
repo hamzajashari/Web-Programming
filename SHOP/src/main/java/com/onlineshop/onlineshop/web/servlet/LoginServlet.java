@@ -1,6 +1,6 @@
 package com.onlineshop.onlineshop.web.servlet;
 
-import com.onlineshop.onlineshop.exceptions.InvalidUserCredentialIsException;
+import com.onlineshop.onlineshop.model.exceptions.InvalidUserCredentialIsException;
 import com.onlineshop.onlineshop.model.User;
 import com.onlineshop.onlineshop.service.AuthService;
 import org.thymeleaf.context.WebContext;

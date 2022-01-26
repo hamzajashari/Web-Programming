@@ -1,6 +1,5 @@
-package com.onlineshop.onlineshop.exceptions;
+package com.onlineshop.onlineshop.model.exceptions;
 
-import com.onlineshop.onlineshop.model.Manufacturer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

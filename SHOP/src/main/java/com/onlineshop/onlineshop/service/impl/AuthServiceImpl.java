@@ -1,8 +1,8 @@
 package com.onlineshop.onlineshop.service.impl;
 
-import com.onlineshop.onlineshop.exceptions.InvalidArgumentsException;
-import com.onlineshop.onlineshop.exceptions.InvalidUserCredentialIsException;
-import com.onlineshop.onlineshop.exceptions.PasswordDoesntMatchException;
+import com.onlineshop.onlineshop.model.exceptions.InvalidArgumentsException;
+import com.onlineshop.onlineshop.model.exceptions.InvalidUserCredentialIsException;
+import com.onlineshop.onlineshop.model.exceptions.PasswordDoesntMatchException;
 import com.onlineshop.onlineshop.model.User;
 import com.onlineshop.onlineshop.repository.InMemoryUserRepository;
 import com.onlineshop.onlineshop.service.AuthService;

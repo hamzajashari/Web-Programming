@@ -1,7 +1,7 @@
 package com.onlineshop.onlineshop.service.impl;
 
-import com.onlineshop.onlineshop.exceptions.CategoryNotFoundException;
-import com.onlineshop.onlineshop.exceptions.ManufacturerNotFoundException;
+import com.onlineshop.onlineshop.model.exceptions.CategoryNotFoundException;
+import com.onlineshop.onlineshop.model.exceptions.ManufacturerNotFoundException;
 import com.onlineshop.onlineshop.model.Category;
 import com.onlineshop.onlineshop.model.Manufacturer;
 import com.onlineshop.onlineshop.model.Product;
