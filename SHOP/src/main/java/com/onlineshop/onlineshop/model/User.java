@@ -2,8 +2,13 @@ package com.onlineshop.onlineshop.model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Data
+@Entity
 public class User {
+    @Id
     private String username;
     private String password;
     private String name;
@@ -14,5 +19,8 @@ public class User {
         this.password = password;
         this.name = name;
         this.surename = surename;
+    }
+
+    public User() {
     }
 }
