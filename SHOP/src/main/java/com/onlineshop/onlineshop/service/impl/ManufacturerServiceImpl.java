@@ -1,7 +1,7 @@
 package com.onlineshop.onlineshop.service.impl;
 
 import com.onlineshop.onlineshop.model.Manufacturer;
-import com.onlineshop.onlineshop.repository.InMemoryManufacturerRepository;
+import com.onlineshop.onlineshop.repository.jpa.ManufacturerRepository;
 import com.onlineshop.onlineshop.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
 
-    private final InMemoryManufacturerRepository manufacturerRepository;
+    private final ManufacturerRepository manufacturerRepository;
 
-    public ManufacturerServiceImpl(InMemoryManufacturerRepository manufacturerRepository) {
+    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
 
@@ -28,11 +28,11 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Optional<Manufacturer> save(String name, String address) {
-        return manufacturerRepository.save(name,address);
+        return Optional.of(manufacturerRepository.save(new Manufacturer(name,address)));
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        return manufacturerRepository.deleteById(id);
+    public void deleteById(Long id) {
+        manufacturerRepository.deleteById(id);
     }
 }

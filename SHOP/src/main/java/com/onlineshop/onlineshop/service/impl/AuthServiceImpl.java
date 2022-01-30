@@ -4,15 +4,16 @@ import com.onlineshop.onlineshop.model.exceptions.InvalidArgumentsException;
 import com.onlineshop.onlineshop.model.exceptions.InvalidUserCredentialIsException;
 import com.onlineshop.onlineshop.model.exceptions.PasswordDoesntMatchException;
 import com.onlineshop.onlineshop.model.User;
-import com.onlineshop.onlineshop.repository.InMemoryUserRepository;
+import com.onlineshop.onlineshop.repository.impl.InMemoryUserRepository;
+import com.onlineshop.onlineshop.repository.jpa.UserRepository;
 import com.onlineshop.onlineshop.service.AuthService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-    private final InMemoryUserRepository UserRepository;
+    private final UserRepository UserRepository;
 
-    public AuthServiceImpl(InMemoryUserRepository userRepository) {
+    public AuthServiceImpl(UserRepository userRepository) {
         UserRepository = userRepository;
     }
 
@@ -32,7 +33,6 @@ public class AuthServiceImpl implements AuthService {
         if(!password.equals(repeatpassword)){
             throw new PasswordDoesntMatchException();
         }
-        User user=new User(username,password,name,surname);
-      return UserRepository.saveOrUpdate(user);
+      return UserRepository.save(new User(username,password,name,surname));
     }
 }

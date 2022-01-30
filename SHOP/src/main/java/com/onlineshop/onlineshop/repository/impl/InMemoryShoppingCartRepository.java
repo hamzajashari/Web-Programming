@@ -1,4 +1,4 @@
-package com.onlineshop.onlineshop.repository;
+package com.onlineshop.onlineshop.repository.impl;
 
 import com.onlineshop.onlineshop.bootstrap.DataHolder;
 import com.onlineshop.onlineshop.model.ShoppingCart;

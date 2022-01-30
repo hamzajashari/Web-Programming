@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=wp
       - POSTGRES_PASSWORD=wp123
       - POSTGRES_DB=e-shop
-    #   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+    #   Maps port 5432 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
     ports:
       - "5432:5432"
     #   Set a volume some that database is not lost after shutting down the container.

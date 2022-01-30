@@ -1,8 +1,5 @@
 package com.onlineshop.onlineshop.model;
-
 import lombok.Data;
-import lombok.Generated;
-import lombok.Getter;
 
 import javax.persistence.*;
 

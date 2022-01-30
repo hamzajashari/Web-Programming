@@ -22,7 +22,7 @@ public class RegisterController {
       @GetMapping
       public String getRegisterPage(@RequestParam(required = false) String error, Model model){
          if(error!=null && !error.isEmpty()){
-             model.addAttribute("Errors",true);
+             model.addAttribute("hasError",true);
              model.addAttribute("error",true);
          }
           return "register";

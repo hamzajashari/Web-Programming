@@ -1,7 +1,7 @@
 package com.onlineshop.onlineshop.service.impl;
 
 import com.onlineshop.onlineshop.model.Category;
-import com.onlineshop.onlineshop.repository.InMemoryCategoryRepository;
+import com.onlineshop.onlineshop.repository.jpa.CategoryRepository;
 import com.onlineshop.onlineshop.service.CategoryService;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +9,8 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final InMemoryCategoryRepository categoryRepository;
-    public CategoryServiceImpl(InMemoryCategoryRepository categoryRepository){
+    private final CategoryRepository categoryRepository;
+    public CategoryServiceImpl(CategoryRepository categoryRepository){
         this.categoryRepository=categoryRepository;
     }
 
@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (name==null || name.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        categoryRepository.delete(name);
+        categoryRepository.deleteByName(name);
     }
 
     @Override
@@ -51,6 +51,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> searchcategories(String searchText) {
-        return categoryRepository.search(searchText);
+        return categoryRepository.findAllByNameLike(searchText);
     }
 }
