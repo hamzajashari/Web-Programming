@@ -5,6 +5,7 @@ import com.onlineshop.onlineshop.model.exceptions.ManufacturerNotFoundException;
 import com.onlineshop.onlineshop.model.Category;
 import com.onlineshop.onlineshop.model.Manufacturer;
 import com.onlineshop.onlineshop.model.Product;
+import com.onlineshop.onlineshop.model.exceptions.ProductNotFoundException;
 import com.onlineshop.onlineshop.repository.jpa.CategoryRepository;
 import com.onlineshop.onlineshop.repository.jpa.ManufacturerRepository;
 import com.onlineshop.onlineshop.repository.jpa.ProductRepository;
@@ -40,8 +41,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findByName(String name) {
-        return productRepository.findByName(name);
+    public Optional<Product> findByName(String name) {
+        return Optional.ofNullable(productRepository.findByName(name));
     }
 
     @Override
@@ -55,6 +56,29 @@ public class ProductServiceImpl implements ProductService {
             .orElseThrow(() -> new ManufacturerNotFoundException(manufacturerId));
     this.productRepository.deleteByName(name);
     return Optional.of(this.productRepository.save(new Product(name,price,quantity,category,manufacturer) ));
+    }
+
+
+
+    @Override
+    @Transactional
+    public Optional<Product> edit(Long id, String name, Double price, Integer quantity, Long categoryId, Long manufacturerId) {
+        Product product = this.productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+
+        product.setName(name);
+        product.setPrice(price);
+        product.setQuantity(quantity);
+
+        Category category = this.categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundException(categoryId));
+        product.setCategory(category);
+
+        Manufacturer manufacturer = this.manufacturerRepository.findById(manufacturerId)
+                .orElseThrow(() -> new ManufacturerNotFoundException(manufacturerId));
+        product.setManufacturer(manufacturer);
+
+        return Optional.of(this.productRepository.save(product));
+
     }
 
     @Override

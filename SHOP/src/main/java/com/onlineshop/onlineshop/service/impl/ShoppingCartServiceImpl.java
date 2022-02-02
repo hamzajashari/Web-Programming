@@ -52,17 +52,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart addProductToShoppingCart(String username, Long prodId) {
+    public ShoppingCart addProductToShoppingCart(String username, Long productId) {
         ShoppingCart shoppingCart = this.getActiveShoppingCart(username);
-        Product product = this.productService.findById(prodId)
-                .orElseThrow(() -> new ProductNotFoundException(prodId));
+        Product product = this.productService.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
         if(shoppingCart.getProducts()
-                .stream()
-                .filter(i->i.getId().equals(prodId))
-                .collect(Collectors.toList()).size() > 0 )
-            throw new ProductAlreadyInShoppingCartException(prodId);
-
+                .stream().filter(i -> i.getId().equals(productId))
+                .collect(Collectors.toList()).size() > 0)
+            throw new ProductAlreadyInShoppingCartException(productId, username);
         shoppingCart.getProducts().add(product);
         return this.shoppingCartRepository.save(shoppingCart);
     }
 }
+
